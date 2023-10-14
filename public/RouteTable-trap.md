@@ -2,11 +2,11 @@
 title: ルートテーブルとサブネットの明示的な関連付けの罠
 tags:
   - AWS
-  - VPC
   - CLI
+  - vpc
 private: false
-updated_at:
-id:
+updated_at: '2023-10-14T23:09:23+09:00'
+id: ddaedcd6946bd4375a32
 organization_url_name: null
 slide: false
 ignorePublish: false
