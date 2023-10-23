@@ -22,8 +22,8 @@ ignorePublish: false
 # 目次
 <!-- タイトルとアンカー名を編集 -->
 1. [設定パターンについて](#1-設定パターンについて)
-2. [AssumeRoleを利用しない場合](#2-AssumeRoleを利用しない場合)
-3. [AssumeRoleを利用する場合](#3-AssumeRoleを利用する場合)
+2. [AssumeRoleを利用しない場合](#2-assumeroleを利用しない場合)
+3. [AssumeRoleを利用する場合](#3-assumeroleを利用する場合)
 4. [参考文献](#6-参考文献)
 
 <a id="#Chapter1"></a>
