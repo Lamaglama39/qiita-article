@@ -1,13 +1,13 @@
 ---
 title: EC2でWindowsFireWallを利用する際の罠
 tags:
+  - Windows
   - AWS
   - EC2
   - SSM
-  - Windows
 private: false
-updated_at: ""
-id: null
+updated_at: '2023-10-27T01:12:44+09:00'
+id: 7ba0c5738287b520a591
 organization_url_name: null
 slide: false
 ignorePublish: false
