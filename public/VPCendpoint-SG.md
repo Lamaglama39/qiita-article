@@ -1,12 +1,12 @@
 ---
 title: セキュリティーグループのアウトバウンドルールでVPCエンドポイント宛の通信を許可する方法
 tags:
-  - 'AWS'
-  - 'vpcendpoint'
-  - 'SecurityGroup'
+  - AWS
+  - SecurityGroup
+  - vpcendpoint
 private: false
-updated_at: ''
-id: null
+updated_at: '2023-11-19T21:16:27+09:00'
+id: 511be91908820c403d75
 organization_url_name: null
 slide: false
 ignorePublish: false
