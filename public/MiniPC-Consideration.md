@@ -1,13 +1,13 @@
 ---
 title: ミニPCとEC2を比較してみた
 tags:
-  - 'ミニPC'
-  - '自宅サーバー'
-  - 'AWS'
-  - 'EC2'
+  - AWS
+  - EC2
+  - 自宅サーバー
+  - ミニPC
 private: false
-updated_at: ''
-id: null
+updated_at: '2023-12-09T01:39:59+09:00'
+id: a04be1a525738dee6c56
 organization_url_name: null
 slide: false
 ignorePublish: false
