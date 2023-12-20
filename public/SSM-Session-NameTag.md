@@ -1,12 +1,12 @@
 ---
 title: EC2のNameタグを指定してSSMセッションマネージャーで接続しよう。
 tags:
-  - 'AWS'
-  - 'EC2'
-  - 'SSM'
+  - AWS
+  - EC2
+  - SSM
 private: false
-updated_at: ''
-id: null
+updated_at: '2023-12-20T22:23:07+09:00'
+id: 215fdf0ffaa08a1efe9b
 organization_url_name: null
 slide: false
 ignorePublish: false
