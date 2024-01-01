@@ -1,12 +1,12 @@
 ---
-title: Ubuntu23でSSHを利用する際の注意点
+title: Ubuntu23でSSHを設定する際の注意点
 tags:
-  - 'SSH'
-  - 'Ubuntu'
-  - 'Linux'
+  - Linux
+  - Ubuntu
+  - SSH
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-01-01T13:47:14+09:00'
+id: f498c1b4439a84a11b79
 organization_url_name: null
 slide: false
 ignorePublish: false
@@ -62,7 +62,7 @@ OpenSSH_9.0p1 Ubuntu-1ubuntu8.5, OpenSSL 3.0.8 7 Feb 2023
 2.RSA/SHA1 暗号鍵が利用できるように許可設定を追加する
 ```
 
-### (1)RSA/SHA1 暗号鍵以外を利用する (公式推奨)
+### (1) RSA/SHA1 暗号鍵以外を利用する (公式推奨)
 
 新規に作成するサーバであればRSA/SHA1以外の暗号鍵を使いましょう。
 
@@ -106,7 +106,7 @@ ssh-copy-idを実行して接続先のサーバに作成した公開鍵を登録
 ssh-copy-id -i ${PubKeyName} ${UserName}@${HostName or IPaddress}
 ```
 
-### (2)RSA/SHA1 暗号鍵が利用できるように許可設定を追加する
+### (2) RSA/SHA1 暗号鍵が利用できるように許可設定を追加する
 
 sshdの設定ファイルで許可設定を追加することで、引き続きRSA/SHA1の暗号鍵を利用することもできます。
 `既存のUbuntuサーバをアップデートしたけど、RSA/SHA1の暗号鍵はそのまま使いたい...`
@@ -130,7 +130,7 @@ sudo systemctl restart ssh.service
 
 <a id="#Chapter3"></a>
 
-## 3-ポート変更について
+## 3.受付ポートの変更について
 
 次にsshの受付ポートを変更する場合の注意点です。
 従来であれば`/etc/ssh/sshd_config`に以下のように任意のポート番号を指定して、sshを再起動すれば受付ポートを変更できましたが、
@@ -168,7 +168,7 @@ sudo systemctl daemon-reload
 
 <a id="#Chapter4"></a>
 
-## 4-最後に
+## 4.最後に
 まさかSSHの設定でハマることになるとは思いませんでしたが、初心に帰って素直にリリースノートを確認することの大切さを再認識しました...。
 
 なお本記事内の`記載誤り/認識齟齬`、または`こういった設定も罠だ！`みたいなものがあれば、ご連絡いただければ幸いです。
