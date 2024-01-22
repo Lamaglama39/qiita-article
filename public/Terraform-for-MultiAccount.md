@@ -131,7 +131,7 @@ resource "aws_s3_bucket" "account2" {
 管理用アカウントのIAMユーザーを利用して、各アカウントのIAMロールへAssumeRoleする方法です。
 
 前述の「1.1 プロファイルのみ利用」と比較すると、
-アカウント単位でのProfileの設定が不要であり、比較的セキュアな設定ができます。
+アカウント単位のIAMユーザー(アクセスキー)の払い出しが不要なため、比較的セキュアに設定ができます。
 また管理用アカウントを用意することで権限を集約できるため、アカウント管理の観点でも有用です。
 
 ![terraform-assume-role.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3491064/3427041e-e985-cbc5-e3b3-981543ea6a2e.png)
@@ -232,17 +232,17 @@ provider "aws" {
 ### ⑤ Terraformリソース定義
 あとはTerraformでリソースを定義する際にproviderを指定してあげれば、
 アカウントの指定ができます。
-以下は例として、アカウント2、アカウント3でそれぞれS3バケットを作成しています。
+以下は例として、アカウント1、アカウント2でそれぞれS3バケットを作成しています。
 ```terraform:リソース定義例
-resource "aws_s3_bucket" "account2" {
-  bucket   = "s3-account2"
-  provider = aws.account2
+resource "aws_s3_bucket" "account1" {
+  bucket   = "s3-account1"
+  provider = aws.account1
   force_destroy = true
 }
 
-resource "aws_s3_bucket" "account3" {
-  bucket   = "s3-account3"
-  provider = aws.account3
+resource "aws_s3_bucket" "account2" {
+  bucket   = "s3-account2"
+  provider = aws.account2
   force_destroy = true
 }
 ```
@@ -266,7 +266,7 @@ Terraformでの条件分岐は基本的に三項演算子で記述します。
 * [Terraform 三項演算子](https://developer.hashicorp.com/terraform/language/expressions/conditionals)
 
 定義された変数を判別して、作成するリソースのパラメータを変更する事ができます。
-以下は変数envがprdのときは「t3.large」、それ以外の時は「t3.micro」のEC2を作成します。
+以下は変数envがprdの場合は「t3.large」、それ以外の場合は「t3.micro」のインスタンスタイプのEC2を作成します。
 
 ```terraform:三項演算子
 variable "env" {
@@ -287,7 +287,7 @@ resource "aws_instance" "server" {
 
 * [Terraform count](https://developer.hashicorp.com/terraform/language/meta-arguments/count)
 
-以下はEC2の5台作成し、それぞれのNameタグにindex+1の数を設定しています。
+以下はEC2を5台作成し、それぞれのNameタグにindex+1の数を指定しています。
 ```terraform:count
 resource "aws_instance" "server" {
   # 作成するリソースの数
@@ -338,7 +338,15 @@ resource "aws_iam_user" "user" {
 * [Terraform モジュール](https://developer.hashicorp.com/terraform/language/modules)
 
 以下は独自にmoduleを作成して利用している例です。
-```terraform:モジュールの定義
+
+```text:ディレクトリ構成
+.
+├── main.tf
+└── modules
+    └── EC2
+        └── main.tf
+```
+```terraform:モジュールの定義 (./modules/EC2/main.tf)
 variable "instance_type" {
   type    = string
   default = "t3.micro"
@@ -356,9 +364,9 @@ resource "aws_instance" "server" {
   }
 }
 ```
-```terraform:モジュールの呼び出し
+```terraform:モジュールの呼び出し (./main.tf)
 module "app_server" {
-  source        = "./ec2.tf"
+  source        = "./modules/EC2"
   instance_type = "t3.large"
   server_name   = "app"
 }
@@ -366,7 +374,7 @@ module "app_server" {
 
 
 または公開されているモジュールを利用することもできます。
-大抵のAWSのリソースはモジュールが公開されているため、自作でモジュールを作る前に覗いてみるのもよいかと思います。
+大抵のAWSのリソースはモジュールが公開されているため、自作する前に覗いてみるのもよいかと思います。
 
 * [Terraform Registry](https://registry.terraform.io/browse/modules)
 
@@ -376,21 +384,22 @@ Workspacesを使用して環境ごとに独立した状態を保持すること�
 
 * [Terraform Workspaces](https://developer.hashicorp.com/terraform/cli/workspaces)
 
-以下はworkspaceを利用する際のコマンド例です。
+具体的な利用方法は公式ドキュメントを参照したほうが分かりやすいと思うので、
+ここではworkspaceを利用する際のコマンド例のみ記載します。
 ```bash:Workspacesの利用
-#workspace 作成
+#workspaceを作成
 terraform workspace new <ワークスペース名>
 
-#workspace 切替
+#workspaceを切替
 terraform workspace select <ワークスペース名>
 
-#workspace 削除
+#workspaceを削除
 terraform workspace delete <ワークスペース名>
 
-#workspace 一覧表示
+#workspaceの一覧を表示
 terraform workspace list
 
-#workspace 選択中の確認
+#現在のworkspaceを表示
 terraform workspace show
 ```
 
