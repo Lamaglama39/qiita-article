@@ -1,12 +1,12 @@
 ---
 title: cool retro termが良すぎるので紹介したい。
 tags:
-  - 'Linux'
-  - 'Terminal'
-  - 'CUI'
+  - Linux
+  - Terminal
+  - CUI
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-02-18T23:27:17+09:00'
+id: 860e2fcdeb0e78f26271
 organization_url_name: null
 slide: false
 ignorePublish: false
