@@ -5,7 +5,7 @@ tags:
   - EC2
   - SSM
 private: false
-updated_at: '2023-12-20T22:23:07+09:00'
+updated_at: '2024-02-29T23:54:21+09:00'
 id: 215fdf0ffaa08a1efe9b
 organization_url_name: null
 slide: false
