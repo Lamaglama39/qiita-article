@@ -33,7 +33,7 @@ AWS CLIで接続する際に`インスタンスID`を指定する必要がある
 結論ですが、以下のスクリプトを丸コピして実行してください。
 使い方は後述の項目を参照してください。
 
-```bash:select-session.sh
+```shell:select-session.sh
 #!/bin/bash
 
 # get InstanceID function
@@ -121,7 +121,7 @@ sh-4.2$
 Nameタグをもとに`aws ec2 describe-instances`を実行して、Nameタグに紐づくインスタンスIDを取得します。
 その後、取得したインスタンスIDを指定して`aws ssm start-session`を実行します。
 
-```bash:Nameタグを指定した場合
+```shell:Nameタグを指定した場合
 # get InstanceID function
 get_instance_id_by_name() {
   aws ec2 describe-instances \
@@ -146,7 +146,7 @@ get_instance_id_by_name() {
 その後NameタグとインスタンスIDを配列に格納して、
 `select`で任意のEC2を選択できるようにしています。
 
-```bash:Nameタグを指定しない場合
+```shell:Nameタグを指定しない場合
 # get all InstanceID and NameTag function
 get_all_instances() {
   aws ssm describe-instance-information \
@@ -180,3 +180,138 @@ get_all_instances() {
 単純計算でアカウント内にEC2が10台あれば`select`できるまで10秒かかります。
 
 というわけで、何か改良案があればご連絡ください...。
+
+## 2024/2/29更新
+よくよく考えたら`aws ec2 describe-instances`をバックグラウンドジョブで実行すればいいだけでした...。
+という訳で更新版を載せておきます。
+
+更新した箇所は少ないですが、
+元と比べてselectが表示されるまで2～3倍は早くなっています。
+
+<details>
+  <summary>更新箇所を表示</summary>
+  <div>
+
+```diff_shell
+  #!/bin/bash
+
+  # Get InstanceID
+  get_instance_id_by_name() {
++   local instance_name="$1"
+    aws ec2 describe-instances \
+      --filter "Name=tag-key,Values=Name" \
++               "Name=tag-value,Values=$instance_name" \
+      --query 'Reservations[*].Instances[*].InstanceId' \
+      --output text
+  }
+
++ # Get Instance Name
++ get_instance_name_by_id() {
++   local instance_id="$1"
++   aws ec2 describe-instances \
++       --instance-ids "$instance_id" \
++       --query 'Reservations[*].Instances[].Tags[?Key==`Name`].Value' \
++       --output text
++ }
+
+  # Get all InstanceID and NameTag
+  get_all_instances() {
+    aws ssm describe-instance-information \
+      --query 'InstanceInformationList[*].[InstanceId]' \
+      --output text | while read -r id; do
++         {
++         name=$(get_instance_name_by_id "$id")
++         echo "$name  $id"
++         } &
+        done
+  }
+
+  # main
+  case $# in
+    1)
+      InstanceID=$(get_instance_id_by_name "$1")
+      aws ssm start-session --target "$InstanceID"
+      ;;
+
+    0)
++     mapfile -t instances < <(get_all_instances | sort)
+      PS3='Select Instance: '
+      select instance in "${instances[@]}"; do
+        [[ -n $instance ]] || continue
+        InstanceID=$(echo "$instance" | awk '{print $2}')
+        aws ssm start-session --target "$InstanceID"
+        break
+      done
+      ;;
+
+    *)
+      echo "Error: Invalid number of arguments."
+      echo "Usage1 Specify Name tag: $0 <NameTag>"
+      echo "Usage2 Select from list: $0"
+      exit 1
+      ;;
+  esac
+```
+  </div>
+</details>
+
+```shell
+#!/bin/bash
+
+# Get InstanceID
+get_instance_id_by_name() {
+  local instance_name="$1"
+  aws ec2 describe-instances \
+    --filter "Name=tag-key,Values=Name" \
+              "Name=tag-value,Values=$instance_name" \
+    --query 'Reservations[*].Instances[*].InstanceId' \
+    --output text
+}
+
+# Get Instance Name
+get_instance_name_by_id() {
+  local instance_id="$1"
+  aws ec2 describe-instances \
+      --instance-ids "$instance_id" \
+      --query 'Reservations[*].Instances[].Tags[?Key==`Name`].Value' \
+      --output text
+}
+
+# Get all InstanceID and NameTag
+get_all_instances() {
+  aws ssm describe-instance-information \
+    --query 'InstanceInformationList[*].[InstanceId]' \
+    --output text | while read -r id; do
+        {
+        name=$(get_instance_name_by_id "$id")
+        echo "$name  $id"
+        } &
+      done
+}
+
+# main
+case $# in
+  1)
+    InstanceID=$(get_instance_id_by_name "$1")
+    aws ssm start-session --target "$InstanceID"
+    ;;
+
+  0)
+    mapfile -t instances < <(get_all_instances | sort)
+    PS3='Select Instance: '
+    select instance in "${instances[@]}"; do
+      [[ -n $instance ]] || continue
+      InstanceID=$(echo "$instance" | awk '{print $2}')
+      aws ssm start-session --target "$InstanceID"
+      break
+    done
+    ;;
+
+  *)
+    echo "Error: Invalid number of arguments."
+    echo "Usage1 Specify Name tag: $0 <NameTag>"
+    echo "Usage2 Select from list: $0"
+    exit 1
+    ;;
+esac
+```
