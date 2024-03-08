@@ -1,13 +1,13 @@
 ---
 title: Ansibleで構築するコンテナオーケストレーション環境
 tags:
-  - 'Ansible'
-  - 'Docker'
-  - 'Kubernetes'
-  - 'Ubuntu'
+  - Ubuntu
+  - Docker
+  - Ansible
+  - kubernetes
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-03-09T02:49:24+09:00'
+id: 8d3cbd398d19644ec2a9
 organization_url_name: null
 slide: false
 ignorePublish: false
