@@ -27,8 +27,7 @@ ignorePublish: false
 :::note info
 本記事は以下リポジトリで作成したプレイブックの解説を中心とした補足資料です。
 すぐに構築したい方はリポジトリのREADMEを参考にして実行してください。
-* [ansible-container-recipes
-](https://github.com/Lamaglama39/ansible-container-recipes/tree/main)
+* [ansible-container-recipes](https://github.com/Lamaglama39/ansible-container-recipes/tree/main)
 :::
 
 <!-- 各チャプター -->
