@@ -1,12 +1,12 @@
 ---
 title: PrivateLinkでアクセス制御出来る箇所が多すぎる件について
 tags:
-  - 'aws'
-  - 'PrivateLink'
-  - 'terraform'
+  - AWS
+  - Terraform
+  - PrivateLink
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-03-11T22:30:20+09:00'
+id: 0a6808af750ee15092d1
 organization_url_name: null
 slide: false
 ignorePublish: false

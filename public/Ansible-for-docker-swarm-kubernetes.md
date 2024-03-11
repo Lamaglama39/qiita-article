@@ -6,7 +6,7 @@ tags:
   - Ansible
   - kubernetes
 private: false
-updated_at: '2024-03-09T02:49:24+09:00'
+updated_at: '2024-03-11T22:30:20+09:00'
 id: 8d3cbd398d19644ec2a9
 organization_url_name: null
 slide: false
