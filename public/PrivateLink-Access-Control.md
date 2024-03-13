@@ -5,7 +5,7 @@ tags:
   - Terraform
   - PrivateLink
 private: false
-updated_at: '2024-03-12T12:24:43+09:00'
+updated_at: '2024-03-13T22:36:37+09:00'
 id: 0a6808af750ee15092d1
 organization_url_name: null
 slide: false
