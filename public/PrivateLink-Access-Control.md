@@ -5,7 +5,7 @@ tags:
   - Terraform
   - PrivateLink
 private: false
-updated_at: '2024-03-11T22:30:20+09:00'
+updated_at: '2024-03-12T12:24:43+09:00'
 id: 0a6808af750ee15092d1
 organization_url_name: null
 slide: false
@@ -24,7 +24,7 @@ AWSアカウント間のデータ連携において、最もメジャーもの�
 :::note info
 本記事の構成を作成するためのTerraformを以下リポジトリで用意しています、
 実際に作成してみて設定値を確認したほうが分かりやすいので良ければご利用ください。
-* [terraform-for-aws](https://github.com/Lamaglama39/terraform-for-aws/tree/main/vpcendpoint-access-via-vpcpeering)
+* [terraform-for-aws](https://github.com/Lamaglama39/terraform-for-aws/tree/main/privatelink-access-control)
 :::
 
 <!-- 各チャプター -->
@@ -94,8 +94,18 @@ PrivateLinkの主なアクセス制御として以下が存在します。
 または`EC2が利用しているセキュリティーグループ`を指定できます。
 こちらも特にこだわりがなければ、セキュリティーグループを指定することをお勧めします。
 
-アウトバウンドルールは以下ドキュメントの通り、特に設定は必要ありません。
+アウトバウンドルールは以下ドキュメントの通り、設定は必要ありません。
 * [VPCエンドポイント ナレッジセンター](https://repost.aws/ja/knowledge-center/security-network-acl-vpc-endpoint)
+* [セキュリティグループのルール](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/security-group-rules.html)
+
+具体的に設定が不要となる理由についてですが、
+アウトバウンドルールの設定自体は可能ですが以下の二点から、PrivateLinkの通信ではアウトバウンドルールが適用されないためです。
+```
+(1).セキュリティグループはステートフルであり、
+    インバウンドが許可されていればアウトバウンドは関係なく通信が流れる
+(2).VPCエンドポイント自身が通信を発信しているわけではないので、
+    アウトバウンドルールは適用されない
+```
 
 | 設定項目            | 設定値                 |
 |:-------------------|:-----------------------|
