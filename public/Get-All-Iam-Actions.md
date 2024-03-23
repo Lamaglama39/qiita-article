@@ -1,13 +1,13 @@
 ---
 title: 【AWS】IAMポリシーで設定できるアクションがいくつあるか、あなたは知っていますか？
 tags:
-  - 'AWS'
-  - 'IAM'
-  - 'Python'
-  - 'スクレイピング'
+  - Python
+  - AWS
+  - スクレイピング
+  - IAM
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-03-23T12:55:47+09:00'
+id: a096556e1ff8c08defc6
 organization_url_name: null
 slide: false
 ignorePublish: false
