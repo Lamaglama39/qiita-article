@@ -21,15 +21,15 @@ ignorePublish: false
 
 # 目次
 <!-- タイトルとアンカー名を編集 -->
-1. [early-kdumpとは](#1-early-kdumpとは)
-2. [設定すると何が嬉しいか](#2-設定すると何が嬉しいか)
-3. [設定方法](#3-設定方法)
-4. [参考文献](#4-参考文献)
+1. [early-kdumpとは](#1early-kdumpとは)
+2. [設定すると何が嬉しいか](#2設定すると何が嬉しいか)
+3. [設定方法](#3設定方法)
+4. [参考文献](#4参考文献)
 
 <!-- 各チャプター -->
 <a id="#Chapter1"></a>
 
-# 1-early-kdumpとは
+# 1.early-kdumpとは
 「early kdump」は、kdumpの一部として実装されている機能です。
 名前通りサービス起動までの時間が重視された機能であり、
 `OS起動段階でカーネルクラッシュが発生した場合のクラッシュダンプ取得`を目的に、
@@ -46,7 +46,7 @@ kdump サービスが起動していないと、起動段階でカーネルが�
 
 <a id="#Chapter2"></a>
 
-# 2-設定すると何が嬉しいか
+# 2.設定すると何が嬉しいか
 前述の通りkdumpサービスの一機能のため、サービス起動までの時間が早いこと以外の違いはありません。
 しかしこの起動時間がかなり重要で、以下条件で確認した限りでは`10倍`の差があります。
 
@@ -84,11 +84,11 @@ Oct 29 14:39:00 ip-10-0-1-10 dracut-cmdline[247]: kdump: kexec: loaded early-kdu
 
 <a id="#Chapter3"></a>
 
-# 3-設定方法
+# 3.設定方法
 基本的には公式ドキュメント記載の手順で問題なく設定できます。
 [early kdumpの有効化-公式ドキュメント](https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/enabling-early-kdump_using-early-kdump-to-capture-boot-time-crashes)
 
-1. まずkdumpが有効でアクティブであることを確認します。
+#### (1) まずkdumpが有効でアクティブであることを確認します。
 そもそもkdumpが無効化されている、またはインストールされていない場合は以下手順で有効化してください。
 [kdumpインストール-公式ドキュメント](https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/installing-kdump-command-lineinstalling-kdump)
 ``````bash
@@ -97,17 +97,17 @@ enabled
 active
 ``````
 
-2. 起動カーネルの initramfs イメージを、early kdump 機能で再構築してください。
+#### (2) 起動カーネルの initramfs イメージを、early kdump 機能で再構築してください。
 ``````bash
 $ dracut -f --add earlykdump
 ``````
 
-3. rd.earlykdump カーネルコマンドラインパラメーターを追加してください。
+#### (3) rd.earlykdump カーネルコマンドラインパラメーターを追加してください。
 ``````bash
 $ grubby --update-kernel=/boot/vmlinuz-$(uname -r) --args="rd.earlykdump"
 ``````
 
-4. rd.earlykdump が正常に追加され、early kdump 機能が有効になっていることを確認します。
+#### (4) rd.earlykdump が正常に追加され、early kdump 機能が有効になっていることを確認します。
 cmdlineに`rd.earlykdump`が含まれており、
 journalctlで`early-kdump is enabled.`,`loaded early-kdump kernel`が含まれていれば、有効化されています。
 ``````bash
@@ -119,7 +119,9 @@ Mar 20 15:44:41 redhat dracut-cmdline[304]: early-kdump is enabled.
 Mar 20 15:44:42 redhat dracut-cmdline[304]: kexec: loaded early-kdump kernel
 ``````
 
-また実行環境がEC2の場合はユーザーデータに設定することで、インスタンス作成段階で有効化することをおすすめします。
+#### ユーザーデータの利用について
+実行環境がEC2の場合はユーザーデータに設定することで、インスタンス作成段階で有効化することをおすすめします。
+※再起動を伴うため、他にユーザーデータの記述がある場合は必ず最後に記載してください
 ```bash:ユーザーデータ
 #!/bin/bash
 sudo dracut -f --add earlykdump
@@ -129,7 +131,7 @@ sudo systemctl reboot
 
 <a id="#reference"></a>
 
-## 4-参考文献
+## 4.参考文献
 
 * [early kdumpについて-公式ドキュメント](https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/using-early-kdump-to-capture-boot-time-crashes_managing-monitoring-and-updating-the-kernel#doc-wrapper)
 * [early kdumpの有効化-公式ドキュメント](https://access.redhat.com/documentation/ja-jp/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/enabling-early-kdump_using-early-kdump-to-capture-boot-time-crashes)
