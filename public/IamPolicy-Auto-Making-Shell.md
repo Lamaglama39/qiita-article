@@ -1,14 +1,14 @@
 ---
 title: AWS CLIの実行結果から不足している権限をIAMポリシーに自動で追加したい
 tags:
+  - ShellScript
+  - Bash
   - AWS
   - IAM
   - aws-cli
-  - Bash
-  - ShellScript
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-04-03T21:48:23+09:00'
+id: 0b839ce634271a827926
 organization_url_name: null
 slide: false
 ignorePublish: false

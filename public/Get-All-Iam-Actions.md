@@ -6,7 +6,7 @@ tags:
   - スクレイピング
   - IAM
 private: false
-updated_at: '2024-03-23T12:55:47+09:00'
+updated_at: '2024-04-03T22:02:19+09:00'
 id: a096556e1ff8c08defc6
 organization_url_name: null
 slide: false
@@ -51,7 +51,7 @@ ignorePublish: false
 流石にこれを405回繰り返すのはつらい...。
 ![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3491064/1f4b148f-796d-5e5e-dbfd-204f91ed45c0.png)
 
-### ③もうドキュメントから引き抜くしか...。
+### (3)もうドキュメントから引き抜くしか...。
 というわけで[例のドキュメント](https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)から地道にスクレイピングすることにしました。
 
 処理内容は以下の通りで、
