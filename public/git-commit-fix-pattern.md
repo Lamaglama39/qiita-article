@@ -1,11 +1,11 @@
 ---
 title: 過去のcommitを修正するいくつかの方法について
 tags:
-  - 'Git'
-  - 'GitHub'
+  - Git
+  - GitHub
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-05-01T17:16:04+09:00'
+id: 63d1914978e4e15536b5
 organization_url_name: null
 slide: false
 ignorePublish: false
