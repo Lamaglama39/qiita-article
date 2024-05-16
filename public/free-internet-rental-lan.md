@@ -1,12 +1,12 @@
 ---
 title: 【戒め】インターネット無料賃貸でサーバ運用するときは個別にLANを分けてください。
 tags:
-  - 'DHCP'
-  - '家庭内LAN'
-  - '自宅サーバー'
+  - DHCP
+  - 自宅サーバー
+  - 家庭内LAN
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-05-17T00:05:09+09:00'
+id: 8078004b215618f45bed
 organization_url_name: null
 slide: false
 ignorePublish: false
