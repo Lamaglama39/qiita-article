@@ -15,15 +15,28 @@ ignorePublish: false
 <!-- 発端や概要を記載 -->
 2023年8月末に、AWSよりAmazon RDS認証局証明書rds-ca-2019の有効期限に関する通知がありました。
 通知内容は、
-「認証局証明書rds-ca-2019は2024/8/23に証明書の有効期限が切れるので、暗号化通信を利用している場合は認証局の更新をする必要がある。」
+「RDS認証局の証明書rds-ca-2019は2024/8/22に証明書の有効期限が切れるので、暗号化通信を利用している場合は認証局を更新する必要がある。」
 とのことで、詳細は以下の公式ドキュメントに記載されています。
 
 [RDS認証局更新について-公式ドキュメント](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html)
 
 実はこれ、過去に「rds-ca-2015」から「rds-ca-2019」へ更新が発生した際も同様の周知がされていました。
 しかし私は完全に油断しており、Health Dashboardの通知が来てから思い出しました...。
-
 基本的に「rds-ca-2015」のときとやることは一緒ですが、今一度確認項目と更新方法を振り返ろうと思います。
+
+なお以下の通りリージョンによって有効期限が異なるため、必ずしも2024/8/23までに対応が必要になるわけではないです。
+| rds-ca-2019 有効期限   | リージョン                  |
+|:----------------------|:---------------------------|
+| 2024 年 5 月 8 日     | 中東 (バーレーン)            |
+| 2024 年 8 月 22 日    | 米国東部 (オハイオ)、米国東部 (バージニア北部)、米国西部 (北カリフォルニア)、米国西部 (オレゴン)、アジアパシフィック (ムンバイ)、アジアパシフィック (大阪)、アジアパシフィック (ソウル)、アジアパシフィック (シンガポール)、アジアパシフィック (シドニー)、アジアパシフィック (東京)、カナダ (中部)、欧州 (フランクフルト)、欧州 (アイルランド)、欧州 (ロンドン)、欧州 (ミラノ)、欧州 (パリ)、欧州 (ストックホルム)、および南米 (サンパウロ)     |
+| 2024 年 9 月 9 日     | 中国 (北京)、中国 (寧夏)    |
+| 2024 年 10 月 26 日   | アフリカ (ケープタウン)     |
+| 2024 年 10 月 28 日   | 欧州 (ミラノ)              |
+| 2061 年まで影響なし    | アジアパシフィック (香港)、アジアパシフィック (ハイデラバード)、アジアパシフィック (ジャカルタ)、アジアパシフィック (メルボルン)、欧州 (スペイン)、欧州 (チューリッヒ)、イスラエル (テルアビブ)、中東 (UAE)、AWS GovCloud (米国東部)、および AWS GovCloud (米国西部) |
+
+詳細は以下公式ドキュメントをご確認ください。
+
+* [リージョンごとの有効期限について](https://aws.amazon.com/jp/blogs/news/rotate-your-ssl-tls-certificates-now-amazon-rds-and-amazon-aurora-expire-in-2024/#:~:text=%E5%BD%B1%E9%9F%BF%E3%82%92%E5%8F%97%E3%81%91%E3%82%8B%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3,%E3%82%92%E6%AC%A1%E3%81%AB%E7%A4%BA%E3%81%97%E3%81%BE%E3%81%99%E3%80%82)
 
 # 目次
 <!-- タイトルとアンカー名を編集 -->
@@ -172,7 +185,7 @@ DBエンジンにより異なりますが、パラメータグループやオプ
 |Oracle	         |`rds-ca-2019`, `rds-ca-rsa4096-g1`, `rds-ca-rsa2048-g1`                     |
 |SQL Server	     |`rds-ca-2019`, `rds-ca-rsa4096-g1`, `rds-ca-rsa2048-g1`                     |
 
-[認証局の一覧-公式ドキュメント](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+* [認証局の一覧-公式ドキュメント](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
 
 なおクライアントソフトやアプリケーションによっては、「rds-ca-rsa4096-g1」、「rds-ca-ecc384-g1」などの認証局の暗号化方式に対応していない可能性があるため、
 基本的にはAWSが推奨している「rds-ca-rsa2048-g1」を選択すれば問題ないかと思います。
@@ -201,7 +214,7 @@ DBエンジンにより異なりますが、パラメータグループやオプ
 
 なお証明書バンドルを利用する設定をしていなければ、基本的にこちらの対応は不要となります。
 
-[証明書バンドル ダウンロード/設定方法 - 公式ドキュメント](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+* [証明書バンドル ダウンロード/設定方法 - 公式ドキュメント](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
 #### ②RDSインスタンスの認証局の更新
 まず認証局更新時に、DBエンジンやバージョンによって再起動する場合と、しない場合があります。
 再起動の有無はマネジメントコンソールやAWS CLIで確認ができ、以下はAWS CLIでMySQLを確認した例です。
@@ -229,7 +242,7 @@ aws rds describe-db-engine-versions \
 ```
 
 次に認証局の更新方法ですが、マネジメントコンソールから更新する方法とAWS CLIで更新する方法があります。
-[RDS認証局更新について-公式ドキュメント](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html)
+* [RDS認証局更新について-公式ドキュメント](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html)
 
 今回はAWS CLIで更新します。
 またコマンドのオプションにて、
@@ -257,5 +270,5 @@ aws rds modify-db-instance \
 振り返ってみると更新作業自体はすぐに完了しますが、
 暗号化通信の利用状況の確認に時間がかかりそうですね...。
 
-なお次回の更新は最短でも`rds-ca-rsa2048-g1`の`2061/5/26`のため、
-また十中八九忘れているので、そのときはこの記事を見て思い出すのでしょう...。
+なお次回の更新は最短でも`rds-ca-rsa2048-g1`の`2061/5/26`であり、
+私はまた十中八九忘れているので、そのときはこの記事を見て思い出すのでしょう...。
