@@ -5,7 +5,7 @@ tags:
   - RDS
   - CLI
 private: false
-updated_at: '2023-10-12T23:53:04+09:00'
+updated_at: '2024-06-11T21:57:28+09:00'
 id: afc311811da8978751a4
 organization_url_name: null
 slide: false
