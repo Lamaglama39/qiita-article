@@ -1,12 +1,12 @@
 ---
 title: asdf/mise コマンド比較
 tags:
-  - 'asdf'
-  - 'mise'
-  - 'cmd'
+  - asdf
+  - cmd
+  - mise
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-06-13T08:24:00+09:00'
+id: 70a359b4f4c613eb2ee6
 organization_url_name: null
 slide: false
 ignorePublish: false
