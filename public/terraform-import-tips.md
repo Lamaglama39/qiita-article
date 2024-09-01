@@ -66,8 +66,8 @@ Terraform管理外のリソースをどのように扱うべきかについて�
 上記の確認を踏まえて、リソースの処遇は大まかに以下の3パターンに分かれるでしょう。
 
 * [1.リソースを削除する](#1リソースを削除する)
-* [2.DataSourcesとして定義する](#2DataSourcesとして定義する)
-* [3.Terraform管理下にする](#3Terraform管理下にする)
+* [2.DataSourcesとして定義する](#2datasourcesとして定義する)
+* [3.Terraform管理下にする](#3terraform管理下にする)
 
 <a id="#Chapter1"></a>
 
@@ -178,9 +178,9 @@ DataSourcesの定義方法は公式ドキュメントに記載があるので、
 またいくつか方法があるので、それぞれのメリット/デメリットを合わせて解説します。
 例として、AWS CLIで作成したEC2インスタンスをimportする流れを記載します。
 
-* [(1).importコマンド](#1importコマンド)
-* [(2).importブロック](#2importブロック)
-* [(3).terraformer](#3terraformer)
+* [1.importコマンド](#1importコマンド)
+* [2.importブロック](#2importブロック)
+* [3.terraformer](#3terraformer)
 
 ### (1).importコマンド
 
@@ -534,7 +534,7 @@ Apply complete! Resources: 2 imported, 0 added, 0 changed, 0 destroyed.
 ```
 
 
-### (3).terraformer
+### 3.terraformer
 terraformerはGoogle Cloud PlatformがOSSとして提供しているツールであり、
 指定した環境内のリソースを読み取って定義情報をtfファイルとして出力します。
 アカウント内の広い範囲をインポートできるため、手動で構築したシステムを丸ごとterraform管理化したい場合などに有用です。
