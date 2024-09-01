@@ -1,13 +1,13 @@
 ---
 title: 正体不明なTerraform管理外リソースのトリセツ。
 tags:
-  - 'Terraform'
-  - 'IaC'
-  - '運用'
-  - '保守'
+  - IaC
+  - 運用
+  - Terraform
+  - 保守
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-09-01T23:12:59+09:00'
+id: 074410e7fba345af5174
 organization_url_name: null
 slide: false
 ignorePublish: false
