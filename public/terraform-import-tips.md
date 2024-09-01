@@ -178,9 +178,9 @@ DataSourcesの定義方法は公式ドキュメントに記載があるので、
 またいくつか方法があるので、それぞれのメリット/デメリットを合わせて解説します。
 例として、AWS CLIで作成したEC2インスタンスをimportする流れを記載します。
 
-* [1.importコマンド](#1importコマンド)
-* [2.importブロック](#2importブロック)
-* [3.terraformer](#3terraformer)
+* [(1).importコマンド](#1importコマンド)
+* [(2).importブロック](#2importブロック)
+* [(3).terraformer](#3terraformer)
 
 ### (1).importコマンド
 
@@ -534,7 +534,7 @@ Apply complete! Resources: 2 imported, 0 added, 0 changed, 0 destroyed.
 ```
 
 
-### 3.terraformer
+### (3).terraformer
 terraformerはGoogle Cloud PlatformがOSSとして提供しているツールであり、
 指定した環境内のリソースを読み取って定義情報をtfファイルとして出力します。
 アカウント内の広い範囲をインポートできるため、手動で構築したシステムを丸ごとterraform管理化したい場合などに有用です。
