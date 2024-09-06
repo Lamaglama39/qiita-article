@@ -1,12 +1,12 @@
 ---
 title: 実践入門 ラバーダック・デバッグ
 tags:
-  - 'debug'
-  - 'リモートワーク'
-  - 'ポエム'
+  - debug
+  - ポエム
+  - リモートワーク
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-09-06T12:15:50+09:00'
+id: 73d689a91f87a16457e1
 organization_url_name: null
 slide: false
 ignorePublish: false
