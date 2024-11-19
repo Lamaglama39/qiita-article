@@ -1,12 +1,12 @@
 ---
 title: わりと使うけど忘れがちなGitコマンド集
 tags:
-  - 'Git'
-  - 'GitHub'
-  - 'cmd'
+  - Git
+  - GitHub
+  - cmd
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-11-20T00:42:13+09:00'
+id: c534891ed24dc1dadf46
 organization_url_name: null
 slide: false
 ignorePublish: false
