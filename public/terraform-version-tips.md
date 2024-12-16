@@ -1,11 +1,11 @@
 ---
 title: Terraformのバージョン管理と制限する方法について
 tags:
-  - 'Terraform'
-  - 'IaC'
+  - IaC
+  - Terraform
 private: false
-updated_at: ''
-id: null
+updated_at: '2024-12-16T12:18:27+09:00'
+id: cbc2ba524e3f75e0f6b9
 organization_url_name: null
 slide: false
 ignorePublish: false
