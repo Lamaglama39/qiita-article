@@ -49,7 +49,8 @@ ignorePublish: false
 ## Qiita APIの仕様と規約について
 
 仕様と規約について全文は以下に記載がありますが、一部抜粋すると、
-* [Qiita API・スクレイピングについて](https://help.qiita.com/ja/articles/qiita-api)
+
+https://help.qiita.com/ja/articles/qiita-api
 
 まずQiita APIの利用において、
 `アプリ等に広告を設置して収益化しない限り`は利用が許可されています。
@@ -67,9 +68,11 @@ Qiita APIでご用意している機能の範囲内でしたら、アプリ等�
 
 また利用制限として、以下二点があります。
 本記事では`認証している状態での利用を想定`して進めます。
-* [Qiita API 利用制限](https://qiita.com/api/v2/docs#%E5%88%A9%E7%94%A8%E5%88%B6%E9%99%90)
-  - (1).`認証している状態`では`ユーザーごと`に1時間に1000回までリクエスト可能
-  - (2).`認証していない状態`では`IPアドレスごと`に1時間に60回までリクエスト可能
+
+* (1).`認証している状態`では`ユーザーごと`に1時間に1000回までリクエスト可能
+* (2).`認証していない状態`では`IPアドレスごと`に1時間に60回までリクエスト可能
+
+https://qiita.com/api/v2/docs#%E5%88%A9%E7%94%A8%E5%88%B6%E9%99%90
 
 
 ## Qiita API 利用方法について
@@ -120,7 +123,7 @@ curl -H 'Authorization: Bearer <アクセストークン>' 'https://qiita.com/ap
 ## タグの取得方法について
 タグを取得するには、`/api/v2/tags`を利用します。
 
-* [GET /api/v2/tags](https://qiita.com/api/v2/docs#get-apiv2tags)
+https://qiita.com/api/v2/docs#get-apiv2tags
 
 また以下のクエリパラメータを利用します。
 なお仕様上100ページ以降は取得できないので、全タグの取得は難しいそうです。
@@ -305,3 +308,11 @@ Qiita側の独断で削除するわけにもいかないので、結果として
 
 もちろんタグは個人が自由に設定できるので、完全オリジナルなものを使うこともできます。
 ただ、せっかく皆さんが`愛を込めて書いた記事`ですから、より多くの人に読まれるように適切なタグを活用していきたいですね。
+
+## 追記
+コメントでいただいた情報を追記しています。
+ご連携ありがとうございます！
+
+https://github.com/increments/qiita-discussions/discussions/237
+
+https://qiita.com/shiracamus/items/fd309513d54c68694bc2
