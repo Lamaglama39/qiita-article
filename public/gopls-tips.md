@@ -1,12 +1,12 @@
 ---
 title: 荒ぶるgoplsよ！！鎮まり給え！！
 tags:
-  - 'Go'
-  - 'gopls'
-  - 'VSCode'
+  - Go
+  - VSCode
+  - gopls
 private: false
-updated_at: ''
-id: null
+updated_at: '2025-02-03T12:55:31+09:00'
+id: be9f2e3e2456dbf88de2
 organization_url_name: null
 slide: false
 ignorePublish: false
